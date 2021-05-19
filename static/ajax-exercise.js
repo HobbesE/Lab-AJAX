@@ -5,14 +5,17 @@
 
 function showFortune(evt) {
 
-    // TODO: get the fortune and show it in the #fortune-text div
+    //make get request at /fortune route and return response
+    $.get('/fortune', (response) => {
+        //take response and put in fortune-text div
+        $('#fortune-text').html(response);
+    });
 }
 
+// when user CLICKS on get-fortune-button, populate response from 
+// ('/fortune) path into fortune-text HTML div 
 $('#get-fortune-button').on('click', showFortune);
-
-
-
-
+  
 
 // PART 2: SHOW WEATHER
 
@@ -20,12 +23,22 @@ function showWeather(evt) {
     evt.preventDefault();
 
     let url = "/weather.json";
+    // key-value pair
     let formData = {"zipcode": $("#zipcode-field").val()};
 
+    //res = response from jsonify() return statement which is basically a dict
+    $.get(url, formData, (res) => {
+        //we can key into json object with 'forecast'
+        $("#weather-info").html(res.forecast);
+    });
+    
+    //make get request from /weather
+    //return response (just the forecast from WEATHER dict)
+    //put response in #weather-info div
 
-    // TODO: request weather with that URL and show the forecast in #weather-info
 }
-
+// when user clicks weather-form button ("Get It")
+// then call showWeather function
 $("#weather-form").on('submit', showWeather);
 
 

@@ -46,8 +46,12 @@ def fortune():
 def weather():
     """Return a weather-info dictionary for this zipcode."""
 
+    #get zipcode from user and store in variable 'zipcode'
     zipcode = request.args.get('zipcode')
+    #key into WEATHER dict with zipcode and return value, 
+    #if zipcode not in WEATHER, return contents of DEFAULT WEATHER dict
     weather_info = WEATHER.get(zipcode, DEFAULT_WEATHER)
+    #converting python dict into js file
     return jsonify(weather_info)
 
 
@@ -72,4 +76,6 @@ def order_melons():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True, use_reloader=True, use_debugger=True)
+    
+
